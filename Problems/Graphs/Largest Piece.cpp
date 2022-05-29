@@ -74,6 +74,12 @@ int getBiggestPieceSize(vector<vector<int>> &cake, int n)
             }
         }
     }
+    for (int i = 0; i < n; i++)
+    {
+        delete[] visited[i];
+    }
+    delete[] visited;
+
     return ans;
 }
 
