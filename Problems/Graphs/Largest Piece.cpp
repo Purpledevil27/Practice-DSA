@@ -26,25 +26,26 @@ using namespace std;
 
 int help(vector<vector<int>> &cake, int n, int i, int j, bool **visited)
 {
+    // checking if out of boundary
+    if (i < 0 || j >= n || i >= n || j < 0)
+        return 0;
+
+    // checking if already visited
+    if (visited[i][j])
+        return 0;
+
+    // checking if cake is 1 or not
+    if (cake[i][j] == 0)
+        return 0;
+
     visited[i][j] = true;
     int ans = 1;
 
-    if (i - 1 >= 0 && cake[i - 1][j] == 1 && !visited[i - 1][j])
-    {
-        ans += help(cake, n, i - 1, j, visited);
-    }
-    if (j + 1 < n && cake[i][j + 1] == 1 && !visited[i][j + 1])
-    {
-        ans += help(cake, n, i, j + 1, visited);
-    }
-    if (i + 1 < n && cake[i + 1][j] == 1 && !visited[i + 1][j])
-    {
-        ans += help(cake, n, i + 1, j, visited);
-    }
-    if (j - 1 >= 0 && cake[i][j - 1] == 1 && !visited[i][j - 1])
-    {
-        ans += help(cake, n, i, j - 1, visited);
-    }
+    ans += help(cake, n, i - 1, j, visited);
+    ans += help(cake, n, i, j + 1, visited);
+    ans += help(cake, n, i + 1, j, visited);
+    ans += help(cake, n, i, j - 1, visited);
+
     return ans;
 }
 
