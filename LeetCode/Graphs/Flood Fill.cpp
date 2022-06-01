@@ -1,4 +1,6 @@
 // https://leetcode.com/problems/flood-fill/
+// Pixel Connectivity - https://homepages.inf.ed.ac.uk/rbf/HIPR2/connect.htm
+// Using 2-D vector - https://www.geeksforgeeks.org/2d-vector-in-cpp-with-user-defined-size/
 
 /*An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.
 
