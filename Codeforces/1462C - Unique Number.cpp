@@ -16,7 +16,7 @@ int main()
             continue;
         }
         int p = 9;
-        while (x > 0 && x)
+        while (x > 0)
         {
             if (x < 10 && x < p)
             {
