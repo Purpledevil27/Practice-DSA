@@ -15,7 +15,7 @@ Expected Time Complexity: O(V + E)
 Expected Auxiliary Space: O(V)
 
 Constraints:
-1 ≤ V, E ≤ 104
+1 ≤ V, E ≤ 10^4
 
 Input:
 1
