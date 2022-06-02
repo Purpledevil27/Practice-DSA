@@ -41,10 +41,6 @@ public:
     // Function to detect cycle in a directed graph.
     bool find(vector<bool> &directed, vector<int> adj[], bool *visited, int i)
     {
-        if (visited[i])
-        {
-            return true;
-        }
         bool ans = false;
         visited[i] = true;
         directed[i] = true;
