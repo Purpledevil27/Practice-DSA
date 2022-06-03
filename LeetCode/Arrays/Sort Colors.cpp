@@ -57,3 +57,23 @@ public:
         }
     }
 };
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> v;
+    for (int i = 0; i < n; i++)
+    {
+        int k;
+        cin >> k;
+        v.push_back(k);
+    }
+    Solution obj;
+    obj.sortColors(v);
+    for (auto i : v)
+    {
+        cout << i << " ";
+    }
+    return 0;
+}
