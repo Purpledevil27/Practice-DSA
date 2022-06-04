@@ -1,6 +1,7 @@
 // https://leetcode.com/problems/sort-colors/
 // Using Dutch national flag Algorithm
 // https://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/
+// https://en.wikipedia.org/wiki/In-place_algorithm
 
 /*Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are
 adjacent, with the colors in the order red, white, and blue.
