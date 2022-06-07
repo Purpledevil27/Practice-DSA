@@ -107,8 +107,6 @@ int main()
         computerconnected[i][1] = s;
     }
 
-    int sr, sc, newColor;
-    cin >> sr >> sc >> newColor;
     Solution obj;
     cout << obj.makeConnected(n, computerconnected);
 
