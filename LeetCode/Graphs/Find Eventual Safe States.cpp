@@ -73,16 +73,16 @@ public:
         int n = graph.size();
 
         vector<bool> visited(n, false), stack(n, false);
-        vector<int> dp(n, -1), v;
+        vector<int> dp(n, -1), ans;
 
         for (int i = 0; i < n; i++)
         {
             if (!isCycle(graph, visited, i, dp, stack))
             {
-                v.emplace_back(i);
+                ans.emplace_back(i);
             }
         }
-        return v;
+        return ans;
     }
 };
 
