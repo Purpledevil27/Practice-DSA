@@ -74,12 +74,12 @@ public:
 class Solution
 {
 public:
-    void find(int n, int h, vector<vector<int>> &adj, vector<int> &it, int time, vector<int> &ans)
+    void find(int n, int h, vector<vector<int>> &adj, vector<int> &informTime, int time, vector<int> &ans)
     {
-        time += it[h];
+        time += informTime[h];
         for (auto i : adj[h])
         {
-            find(n, i, adj, it, time, ans);
+            find(n, i, adj, informTime, time, ans);
         }
         ans.push_back(time);
     }
