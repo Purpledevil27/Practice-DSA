@@ -71,17 +71,18 @@ public:
     }
 };
 
+// Using Adjacency List
 class Solution
 {
 public:
-    void find(int n, int h, vector<vector<int>> &adj, vector<int> &informTime, int time, vector<int> &ans)
+    int find(int h, vector<vector<int>> &adj, vector<int> &informTime)
     {
-        time += informTime[h];
+        int time = 0;
         for (auto i : adj[h])
         {
-            find(n, i, adj, informTime, time, ans);
+            time = max(time, find(i, adj, informTime));
         }
-        ans.push_back(time);
+        return time + informTime[h];
     }
 
     int numOfMinutes(int n, int headID, vector<int> &manager, vector<int> &informTime)
@@ -95,10 +96,6 @@ public:
             }
             adj[manager[i]].emplace_back(i);
         }
-
-        vector<int> v;
-        find(n, headID, adj, informTime, 0, v);
-
-        return *max_element(v.begin(), v.end());
+        return find(headID, adj, informTime);
     }
 };
