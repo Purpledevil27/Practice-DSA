@@ -46,6 +46,55 @@ All pairs (fromi, toi) are distinct.
 #include <bits/stdc++.h>
 using namespace std;
 
+// Using Floyd Warshall Algorithm
+class Solution
+{
+public:
+    int findTheCity(int n, vector<vector<int>> &edges, int distanceThreshold)
+    {
+        vector<vector<int>> city(n, vector<int>(n, INT_MAX));
+        for (auto i : edges)
+        {
+            city[i[0]][i[1]] = i[2];
+            city[i[1]][i[0]] = i[2];
+        }
+
+        for (int k = 0; k < n; k++)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (i == j)
+                        continue;
+                    if (city[i][k] != INT_MAX && city[k][j] != INT_MAX && city[i][j] > city[i][k] + city[k][j])
+                    {
+                        city[i][j] = city[i][k] + city[k][j];
+                    }
+                }
+            }
+        }
+        int ans = -1, c = INT_MAX;
+        for (int i = 0; i < n; i++)
+        {
+            int nc = 0;
+            for (int j = 0; j < n; j++)
+            {
+                if (city[i][j] != INT_MAX && city[i][j] <= distanceThreshold)
+                {
+                    nc++;
+                }
+            }
+            if (nc <= c)
+            {
+                ans = i;
+                c = nc;
+            }
+        }
+        return ans;
+    }
+};
+
 // Using Dijkstra Algorithm and Adjacency Matrix
 class Solution
 {
