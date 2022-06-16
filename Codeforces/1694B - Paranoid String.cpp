@@ -12,7 +12,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n, ans;
+        ll n, ans;
         string S;
         cin >> n >> S;
         ans = n;
