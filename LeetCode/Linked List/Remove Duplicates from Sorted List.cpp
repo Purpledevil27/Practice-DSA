@@ -106,7 +106,7 @@ int main()
 {
     ListNode *head = takeInput();
     Solution obj;
-    ListNode *mid = obj.middleNode(head);
+    ListNode *mid = obj.deleteDuplicates(head);
     print(mid);
     return 0;
 }
