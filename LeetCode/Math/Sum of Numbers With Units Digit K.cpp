@@ -42,7 +42,43 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
-// Better Code / same approach as below
+// Using Dynamic Programming and similar approach to coin change problem
+class Solution
+{
+    int count(vector<int> &lastdigitwithK, int sum)
+    {
+        vector<int> table(sum + 1, INT_MAX);
+        table[0] = 0;
+        int size = lastdigitwithK.size();
+        for (int i = 0; i <= sum; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                if (lastdigitwithK[j] <= i && table[i - lastdigitwithK[j]] != INT_MAX)
+                {
+                    table[i] = min(table[i], table[i - lastdigitwithK[j]] + 1);
+                }
+            }
+        }
+        return table[sum] == INT_MAX ? -1 : table[sum];
+    }
+
+public:
+    int minimumNumbers(int sum, int k)
+    {
+        vector<int> lastdigitwithK;
+        for (int i = 0; i <= sum; i++)
+        {
+            if (i % 10 == k)
+            {
+                lastdigitwithK.push_back(i);
+            }
+        }
+        return count(lastdigitwithK, sum);
+    }
+};
+
+// Better Code and same approach as below
 class Solution
 {
 public:
