@@ -106,23 +106,31 @@ int main()
 // Function to push an integer into the stack1.
 void twoStacks ::push1(int x)
 {
-    top1++;
-    if (top1 >= size / 2)
+    if (top1 < top2 - 1)
     {
-        return;
+        top1++;
+        arr[top1] = x;
     }
-    arr[top1] = x;
+    else
+    {
+        cout << "Stack Overflow";
+        exit(1);
+    }
 }
 
 // Function to push an integer into the stack2.
 void twoStacks ::push2(int x)
 {
-    top2--;
-    if (top2 <= size / 2)
+    if (top1 < top2 - 1)
     {
-        return;
+        top2--;
+        arr[top2] = x;
     }
-    arr[top2] = x;
+    else
+    {
+        cout << "Stack Overflow";
+        exit(1);
+    }
 }
 
 // Function to remove an element from top of the stack1.
