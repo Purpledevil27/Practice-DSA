@@ -42,7 +42,7 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
-// Using Dynamic Programming and similar approach to coin change problem
+// Using Dynamic Programming and similar approach to coin change problem (UNBOUNDED KNAPSACK)
 class Solution
 {
     int count(vector<int> &lastdigitwithK, int sum)
