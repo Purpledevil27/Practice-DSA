@@ -39,6 +39,7 @@ public:
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// Using Queue - Approach #1
 class Solution
 {
 public:
@@ -70,6 +71,7 @@ public:
     }
 };
 
+// Using Recursion - Approach #2
 class Solution
 {
 public:
@@ -91,6 +93,7 @@ public:
         return root;
     }
 };
+
 TreeNode *takeInputLevelWise()
 {
     queue<TreeNode *> pendingNodes;
