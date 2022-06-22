@@ -47,6 +47,27 @@ public:
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// Approach #1
+class Solution
+{
+public:
+    bool hasPathSum(TreeNode *root, int targetSum)
+    {
+        if (root == NULL)
+        {
+            return false;
+        }
+        targetSum -= root->val;
+        if (!root->left && !root->right)
+        {
+            return targetSum == 0;
+        }
+
+        return hasPathSum(root->left, targetSum) || hasPathSum(root->right, targetSum);
+    }
+};
+
+// Approach #2
 class Solution
 {
 public:
@@ -79,25 +100,6 @@ public:
         bool ans = false;
         solve(root, targetSum, 0, ans);
         return ans;
-    }
-};
-
-class Solution
-{
-public:
-    bool hasPathSum(TreeNode *root, int targetSum)
-    {
-        if (root == NULL)
-        {
-            return false;
-        }
-        targetSum -= root->val;
-        if (!root->left && !root->right)
-        {
-            return targetSum == 0;
-        }
-
-        return hasPathSum(root->left, targetSum) || hasPathSum(root->right, targetSum);
     }
 };
 
