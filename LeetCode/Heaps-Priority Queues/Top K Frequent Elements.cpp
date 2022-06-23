@@ -34,16 +34,21 @@ public:
         {
             m[nums[i]]++;
         }
+        // Using Priority Queue of pairs ordering by first element
+        // (first elements is frequency of a distinct element from the nums & and second element is that distinct element itself)
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         unordered_map<int, int>::iterator it = m.begin();
+        // pushing the random first k elements from the map into the pq
         for (int i = 0; i < k; i++)
         {
             pq.push({it->second, it->first});
             it++;
         }
+        // iterating till the end of the map
         while (it != m.end())
         {
             pair<int, int> top = pq.top();
+            // checking if more frequent element is present in map than top(min) element in pq
             if (it->second > top.first)
             {
                 pq.pop();
@@ -51,6 +56,7 @@ public:
             }
             it++;
         }
+        // finally, pushing the top frequent key into the answer
         while (!pq.empty())
         {
             ans.push_back(pq.top().second);
@@ -73,10 +79,12 @@ public:
         {
             m[i]++;
         }
+        // Pushing the element into their frequency number
         for (const auto &it : m)
         {
             bucket[it.second].push_back(it.first);
         }
+        // such that now we start iterating from the back of the vector and break/return when the k most frequent elements are found
         for (int i = bucket.size() - 1; i >= 0; i--)
         {
             for (int j = 0; j < bucket[i].size(); j++)
