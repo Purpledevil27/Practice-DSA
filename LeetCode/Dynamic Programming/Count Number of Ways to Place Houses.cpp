@@ -44,7 +44,7 @@ public:
         {
             dp[i] = ((dp[i - 1] % (mod) + dp[i - 2] % (mod)) % (mod));
         }
-        return ((long)(dp[n + 2] % (mod)) * (dp[n + 2] % (mod))) % (mod);
+        return ((long)(dp[n + 2]) * (dp[n + 2])) % (mod);
     }
 };
 
