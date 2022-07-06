@@ -31,6 +31,7 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
+// Using Iterative + memo
 class Solution
 {
 public:
@@ -45,6 +46,26 @@ public:
             dp[i] = ((dp[i - 1] % (mod) + dp[i - 2] % (mod)) % (mod));
         }
         return ((long)(dp[n + 2]) * (dp[n + 2])) % (mod);
+    }
+};
+
+// Using Iterative + 2 variables (bottom-up)
+class Solution
+{
+public:
+    int countHousePlacements(int n)
+    {
+        int mod = 1000000007;
+        int dp0 = 0;
+        int dp1 = 1;
+        int ans = 0;
+        for (int i = 0; i <= n; i++)
+        {
+            ans = (dp0 + dp1) % mod;
+            dp0 = dp1;
+            dp1 = ans;
+        }
+        return ((long long)ans * ans) % mod;
     }
 };
 
