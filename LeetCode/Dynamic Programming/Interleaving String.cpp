@@ -155,3 +155,12 @@ public:
         return solve(s1, s2, s3);
     }
 };
+
+int main()
+{
+    string s1, s2, s3;
+    cin >> s1 >> s2 >> s3;
+    Solution obj;
+    cout << obj.isInterleave(s1, s2, s3);
+    return 0;
+}
