@@ -37,6 +37,7 @@ At most 3 * 10^4 calls in total will be made to insert, search, and startsWith.
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach #1 - Recursive
 class TrieNode
 {
 public:
@@ -133,6 +134,70 @@ public:
     bool startsWith(string prefix)
     {
         return startsWith(root, prefix);
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
+
+// Approach #2 - Iterative
+class TrieNode
+{
+public:
+    TrieNode *children[26];
+    bool isTerminal;
+    TrieNode(bool b = false)
+    {
+        memset(children, 0, sizeof(children));
+        isTerminal = b;
+    }
+};
+
+class Trie
+{
+    TrieNode *root;
+
+public:
+    Trie()
+    {
+        root = new TrieNode();
+    }
+
+    void insert(string word)
+    {
+        TrieNode *p = root;
+        for (auto x : word)
+        {
+            if (p->children[x - 'a'] == NULL)
+                p->children[x - 'a'] = new TrieNode();
+            p = p->children[x - 'a'];
+        }
+        p->isTerminal = true;
+    }
+
+    bool search(string word)
+    {
+        TrieNode *p = find(word);
+        return p && (p->isTerminal);
+    }
+
+    bool startsWith(string prefix)
+    {
+        return find(prefix);
+    }
+
+private:
+    TrieNode *find(string s)
+    {
+        TrieNode *p = root;
+        for (int i = 0; i < s.size() && p; i++)
+            p = p->children[s[i] - 'a'];
+        return p;
     }
 };
 
