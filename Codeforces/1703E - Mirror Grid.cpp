@@ -22,12 +22,12 @@ int main()
             grid.push_back(s);
         }
         int ans = 0;
-        int nn = n, start = 0, end = n;
-        while (nn > 1)
+        int size = n, start = 0, end = n;
+        while (size > 1)
         {
-            int c = nn - 1;
-            vector<pair<int, int>> dp(c);
-            int i = start, j = start, step = 4 * c;
+            int unique_ele = size - 1;
+            vector<pair<int, int>> dp(unique_ele);
+            int i = start, j = start, step = 4 * unique_ele;
             while (step > 0)
             {
                 while (j < end && step > 0)
@@ -35,11 +35,11 @@ int main()
                     // cout << grid[i][j] << " ";
                     if (grid[i][j] == '0')
                     {
-                        dp[step % c].first++;
+                        dp[step % unique_ele].first++;
                     }
                     else
                     {
-                        dp[step % c].second++;
+                        dp[step % unique_ele].second++;
                     }
                     j++;
                     step--;
@@ -51,11 +51,11 @@ int main()
                     // cout << grid[i][j] << " ";
                     if (grid[i][j] == '0')
                     {
-                        dp[step % c].first++;
+                        dp[step % unique_ele].first++;
                     }
                     else
                     {
-                        dp[step % c].second++;
+                        dp[step % unique_ele].second++;
                     }
                     i++;
                     step--;
@@ -67,11 +67,11 @@ int main()
                     // cout << grid[i][j] << " ";
                     if (grid[i][j] == '0')
                     {
-                        dp[step % c].first++;
+                        dp[step % unique_ele].first++;
                     }
                     else
                     {
-                        dp[step % c].second++;
+                        dp[step % unique_ele].second++;
                     }
                     j--;
                     step--;
@@ -84,11 +84,11 @@ int main()
                     // cout << grid[i][j] << " ";
                     if (grid[i][j] == '0')
                     {
-                        dp[step % c].first++;
+                        dp[step % unique_ele].first++;
                     }
                     else
                     {
-                        dp[step % c].second++;
+                        dp[step % unique_ele].second++;
                     }
                     i--;
                     step--;
@@ -99,7 +99,7 @@ int main()
                 // cout<< i.first << " " << i.second << endl;
                 ans += (min(i.first, i.second));
             }
-            nn -= 2;
+            size -= 2;
             start++;
             end--;
         }
