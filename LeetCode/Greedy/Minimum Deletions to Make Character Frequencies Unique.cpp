@@ -85,10 +85,8 @@ public:
         sort(begin(freq), end(freq), greater<int>());
         int prev = freq[0];
         int ans = s.size() - prev;
-        for (int i = 1; i < 26; ++i)
+        for (int i = 1; i < 26 && (freq[i] > 0 || prev > 0); ++i)
         {
-            if (freq[i] == 0 || prev == 0)
-                break;
             prev = min(freq[i], prev - 1);
             ans -= prev;
         }
