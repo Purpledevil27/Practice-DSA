@@ -61,7 +61,8 @@ public:
 
                 while (rem && j >= left) // removing only till the left index
                 {
-                    // changing the character so that we can recognise removing element later. Also keeping in the mind that we do not remove the previously removed element. i.e. removing/changing the element twice.
+                    // changing the character so that we can recognise removing element later.
+                    // Also keeping in the mind that we do not remove the previously removed element. i.e. removing/changing the element twice.
                     if (temp[j] != '*')
                     {
                         temp[j] = '*';
@@ -77,6 +78,10 @@ public:
                 temp[i] = '*';
                 continue;
             }
+            // Pushing only when stack is empty or when there are different num[]
+            // We don't need to push every indices because if there is num[] = "11111110" and k=5,
+            // then right = 6 (since i will be at 0, i = 7) and left = s.top() i.e. left = 0. So, rem = min(5, 6-0+1) i.e. rem = 5.
+            // So it will remove/change 5 element start from right to the left side till rem!=0 or it reaches the left most side.
             if ((s.empty()) || (!s.empty() && num[s.top()] != num[i]))
             {
                 s.push(i);
