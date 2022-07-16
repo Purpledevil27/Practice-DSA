@@ -30,6 +30,35 @@ class Solution
             ans.push_back(v);
             return;
         }
+        for (int i = num; i <= n; i++)
+        {
+            if (k > n - i + 1)
+                break;
+            v.push_back(i);
+            bt(n, k - 1, i + 1, ans, v);
+            v.pop_back();
+        }
+    }
+
+public:
+    vector<vector<int>> combine(int n, int k)
+    {
+        vector<int> v;
+        vector<vector<int>> ans;
+        bt(n, k, 1, ans, v);
+        return ans;
+    }
+};
+
+class Solution
+{
+    void bt(const int &n, int k, int num, vector<vector<int>> &ans, vector<int> &v)
+    {
+        if (k == 0)
+        {
+            ans.push_back(v);
+            return;
+        }
         if (num > n)
         {
             return;
