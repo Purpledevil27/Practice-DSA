@@ -28,6 +28,7 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach #1
 class Solution
 {
 public:
@@ -47,6 +48,7 @@ public:
     }
 };
 
+// Approach #2
 class Solution
 {
 public:
