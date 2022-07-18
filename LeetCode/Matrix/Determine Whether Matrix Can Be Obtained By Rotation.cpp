@@ -30,6 +30,55 @@ mat[i][j] and target[i][j] are either 0 or 1.
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach #1
+class Solution
+{
+public:
+    bool findRotation(vector<vector<int>> &mat, vector<vector<int>> &target)
+    {
+        bool c[4];
+        memset(c, true, sizeof(c));
+        int n = mat.size();
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (mat[i][j] != target[i][j])
+                    c[0] = false;
+                if (mat[i][j] != target[n - j - 1][i])
+                    c[1] = false;
+                if (mat[i][j] != target[n - i - 1][n - j - 1])
+                    c[2] = false;
+                if (mat[i][j] != target[j][n - i - 1])
+                    c[3] = false;
+            }
+        }
+        return c[0] || c[1] || c[2] || c[3];
+    }
+};
+
+// Approach #2
+class Solution
+{
+public:
+    bool findRotation(vector<vector<int>> &mat, vector<vector<int>> &target)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            int n = mat.size();
+            for (int i = 0; i < n; i++)
+                for (int j = i + 1; j < n; j++) // first swap then reverse each row
+                    swap(mat[i][j], mat[j][i]);
+            for (int i = 0; i < n; i++)
+                reverse(mat[i].begin(), mat[i].end());
+            if (mat == target)
+                return true;
+        }
+        return false;
+    }
+};
+
+// Approach #3
 class Solution
 {
 public:
@@ -50,26 +99,6 @@ public:
                 }
             }
             if (matrix == target)
-                return true;
-        }
-        return false;
-    }
-};
-
-class Solution
-{
-public:
-    bool findRotation(vector<vector<int>> &mat, vector<vector<int>> &target)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            int n = mat.size();
-            for (int i = 0; i < n; i++)
-                for (int j = i + 1; j < n; j++) // first swap then reverse each row
-                    swap(mat[i][j], mat[j][i]);
-            for (int i = 0; i < n; i++)
-                reverse(mat[i].begin(), mat[i].end());
-            if (mat == target)
                 return true;
         }
         return false;
