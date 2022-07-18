@@ -108,7 +108,7 @@ public:
     }
 };
 
-// Approach #4
+// Approach #3
 class Solution
 {
 public:
