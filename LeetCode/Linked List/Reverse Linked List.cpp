@@ -46,8 +46,9 @@ public:
         if (head == NULL || head->next == NULL)
             return head;
         ListNode *temp = reverseList(head->next);
-        ListNode *tail = head->next;
-        tail->next = head;
+        head->next->next = head;
+        /*ListNode *tail = head->next;
+        tail->next = head;*/
         head->next = NULL;
         return temp;
     }
