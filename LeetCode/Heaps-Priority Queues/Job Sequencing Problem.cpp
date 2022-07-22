@@ -94,26 +94,26 @@ public:
     // Function to find the maximum profit and the number of jobs done.
     vector<int> JobScheduling(Job arr[], int n)
     {
-        vector<bool> vis(n, false);
+        vector<bool> visited(n, false);
 
         sort(arr, arr + n, [](Job const &s, Job const &n)
              { return s.profit > n.profit; });
-        int deadline = 0;
+        int job = 0;
         int profit = 0;
         for (int i = 0; i < n; i++)
         {
             for (int k = min(n, arr[i].dead - 1); k >= 0; k--)
             {
-                if (vis[k] == false)
+                if (visited[k] == false)
                 {
-                    vis[k] = true;
-                    deadline++;
+                    visited[k] = true;
+                    job++;
                     profit += arr[i].profit;
                     break;
                 }
             }
         }
-        return {deadline, profit};
+        return {job, profit};
     }
 };
 
