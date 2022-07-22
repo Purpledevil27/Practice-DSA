@@ -28,10 +28,6 @@ class Solution
     void solve(vector<int> &nums, vector<int> &v, vector<vector<int>> &ans, int start)
     {
         ans.push_back(v);
-        if (nums.size() == start)
-        {
-            return;
-        }
         for (int i = start; i < nums.size(); i++)
         {
             v.push_back(nums[i]);
