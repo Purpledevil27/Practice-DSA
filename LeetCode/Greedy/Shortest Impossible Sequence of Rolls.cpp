@@ -41,22 +41,43 @@ n == rolls.length
 #include <bits/stdc++.h>
 using namespace std;
 
+// Approach #1
 class Solution
 {
 public:
-    int shortestSequence(vector<int> &A, int k)
+    int shortestSequence(vector<int> &rolls, int k)
     {
-        int res = 1;
+        int ans = 1;
         unordered_set<int> s;
-        for (int &a : A)
+        for (int &num : rolls)
         {
-            s.insert(a);
+            s.insert(num);
             if (s.size() == k)
             {
-                res++;
+                ans++;
                 s.clear();
             }
         }
-        return res;
+        return ans;
+    }
+};
+
+// Approach #2
+// Implementation note: instead of resetting the counter, we use the sequence number to check if a dice has appeared for the current sequence.
+// When we have all dice, we increase seq, so all dice must appear again.
+class Solution
+{
+public:
+    int shortestSequence(vector<int> &rolls, int k)
+    {
+        int seq = 0, cnt = 0, dice[100001] = {};
+        for (auto r : rolls)
+            if (dice[r] == seq)
+            {
+                dice[r] = seq + 1;
+                if (++cnt % k == 0)
+                    ++seq;
+            }
+        return seq + 1;
     }
 };
