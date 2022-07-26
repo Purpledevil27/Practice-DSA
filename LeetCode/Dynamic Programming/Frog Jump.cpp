@@ -28,6 +28,35 @@ stones is sorted in a strictly increasing order.
 #include <bits/stdc++.h>
 using namespace std;
 
+// Bottom Up approach Dp
+class Solution
+{
+public:
+    bool canCross(vector<int> &stones)
+    {
+        int n = stones.size();
+        vector<vector<int>> dp(n, vector<int>(n + 1, 0));
+        dp[0][1] = 1;
+        for (int i = 1; i < n; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                int dist = stones[i] - stones[j];
+                if (dist < 0 || dist > n || !dp[j][dist])
+                    continue;
+                dp[i][dist] = 1;
+                if (dist > 0)
+                    dp[i][dist - 1] = 1;
+                if (dist < n)
+                    dp[i][dist + 1] = 1;
+                if (i == n - 1)
+                    return true;
+            }
+        }
+        return false;
+    }
+};
+
 // Memoization - Top Down Approach
 class Solution
 {
