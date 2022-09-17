@@ -78,7 +78,7 @@ class Trie
     }
 
 public:
-    int emptyIndex = -1;
+    int emptyStringIndex = -1;
     Trie()
     {
         root = new TrieNode('\0');
@@ -115,10 +115,10 @@ public:
                 {
                     ans.push_back({idx, p->index});
                 }
-                if (p->index == idx && emptyIndex != -1)
+                if (p->index == idx && emptyStringIndex != -1)
                 {
-                    ans.push_back({idx, emptyIndex});
-                    ans.push_back({emptyIndex, idx});
+                    ans.push_back({idx, emptyStringIndex});
+                    ans.push_back({emptyStringIndex, idx});
                 }
             }
         }
@@ -160,7 +160,7 @@ public:
         {
             if (words[i].size() == 0)
             {
-                t.emptyIndex = i;
+                t.emptyStringIndex = i;
             }
             string word = words[i];
             reverse(word.begin(), word.end());
