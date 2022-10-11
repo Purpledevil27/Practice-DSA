@@ -67,7 +67,6 @@ public:
     {
         string s;
         solve(root, s);
-        // cout << s << endl;
         return s;
     }
 
