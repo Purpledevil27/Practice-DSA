@@ -24,7 +24,6 @@ Explanation: We must delete a character, so either the frequency of "a" is 1 and
 
 
 Constraints:
-
 2 <= word.length <= 100
 word consists of lowercase English letters only.
 */
@@ -37,50 +36,31 @@ class Solution
 public:
     bool equalFrequency(string word)
     {
-        unordered_map<char, int> m;
-        for (auto &i : word)
-            m[i]++;
+        unordered_map<char, int> mp;
+        map<int, int> mp2;
+        for (auto c : word)
+            mp[c]++;
 
-        if (m.size() == 1)
-            return true;
+        for (auto m : mp)
+            mp2[m.second]++;
 
-        unordered_map<char, int> m1;
-        for (auto &i : m)
-            m1[i.second]++;
-
-        if (m1.size() > 2)
+        if (mp2.size() > 2)
             return false;
+        map<int, int>::iterator it1 = mp2.begin();
+        map<int, int>::iterator it2 = mp2.begin();
+        it2++;
 
-        if (m1.size() == 1 && m1.count(1) != 0)
-            return true;
-        else if (m1.size() == 1)
-            return false;
-
-        int f = -1, s = -1;
-        for (auto &i : m1)
+        if (mp2.size() == 1)
         {
-            if (f == -1)
-                f = i.first;
-            else
-                s = i.first;
-        }
-        if (abs(f - s) != 1)
+            if (mp.size() == 1 || it1->first == 1)
+                return true;
             return false;
-        else
-        {
-            m1[max(f, s)]--;
-            int same = -1;
-            for (auto &i : m1)
-            {
-                if (i.second != 0 && same == -1)
-                    same = i.second;
-                else
-                {
-                    if (i.second != 0 && i.second != same)
-                        return false;
-                }
-            }
         }
-        return true;
+
+        if (it1->first == 1 && it1->second == 1)
+            return true;
+        if (it1->first == it2->first - 1 && it2->second == 1)
+            return true;
+        return false;
     }
 };

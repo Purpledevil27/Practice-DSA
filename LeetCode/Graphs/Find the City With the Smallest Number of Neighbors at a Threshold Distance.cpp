@@ -95,78 +95,57 @@ public:
     }
 };
 
-// Using Dijkstra Algorithm and Adjacency Matrix
+// Using Dijkstra Algorithm - NlogN
 class Solution
 {
 public:
-    int find(vector<int> &distance, int n, vector<bool> &visited)
+    void dijkstra(int n, vector<vector<pair<int, int>>> &edge, int const &source, int const &distanceThreshold, int &ans, int &num)
     {
-        int minVertex = -1;
-        for (int i = 0; i < n; i++)
-        {
-            if (!visited[i] && (minVertex == -1 || distance[i] < distance[minVertex]))
-            {
-                minVertex = i;
-            }
-        }
-        return minVertex;
-    }
-
-    void dijkstra(int n, vector<vector<int>> &edge, int source, int distanceThreshold, vector<int> &city)
-    {
-        vector<bool> visited(n, false);
         vector<int> distance(n, INT_MAX);
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         distance[source] = 0;
-
-        for (int i = 0; i < n - 1; i++)
+        pq.push({0, source});
+        while (!pq.empty())
         {
-            int minVertex = find(distance, n, visited);
-            visited[minVertex] = true;
-            if (distance[minVertex] == INT_MAX)
+            int dist = pq.top().first;
+            int prev = pq.top().second;
+            pq.pop();
+            for (auto &i : edge[prev])
             {
-                break;
-            }
-            for (int j = 0; j < n; j++)
-            {
-                if (!visited[j] && edge[minVertex][j])
+                if (distance[i.first] > dist + i.second)
                 {
-                    if (distance[j] > edge[minVertex][j] + distance[minVertex])
-                    {
-                        distance[j] = edge[minVertex][j] + distance[minVertex];
-                    }
+                    distance[i.first] = dist + i.second;
+                    pq.push({distance[i.first], i.first});
                 }
             }
         }
+        int city = 0;
         for (int i = 0; i < n; i++)
         {
             if (distance[i] != 0 && distance[i] <= distanceThreshold)
             {
-                city[source]++;
+                city++;
             }
+        }
+        if (num >= city)
+        {
+            num = city;
+            ans = max(ans, source);
         }
     }
 
     int findTheCity(int n, vector<vector<int>> &edges, int distanceThreshold)
     {
-        vector<vector<int>> edge(n, vector<int>(n, 0));
-        vector<int> city(n, 0);
+        vector<vector<pair<int, int>>> edge(n);
+        int ans = INT_MIN, num = INT_MAX;
         for (auto i : edges)
         {
-            edge[i[0]][i[1]] = i[2];
-            edge[i[1]][i[0]] = i[2];
+            edge[i[0]].push_back({i[1], i[2]});
+            edge[i[1]].push_back({i[0], i[2]});
         }
         for (int i = 0; i < n; i++)
         {
-            dijkstra(n, edge, i, distanceThreshold, city);
-        }
-        int ans = -1, c = INT_MAX;
-        for (int i = 0; i < n; i++)
-        {
-            if (city[i] <= c)
-            {
-                ans = i;
-                c = city[i];
-            }
+            dijkstra(n, edge, i, distanceThreshold, ans, num);
         }
         return ans;
     }

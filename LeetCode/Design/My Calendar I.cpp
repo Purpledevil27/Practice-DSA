@@ -33,6 +33,35 @@ At most 1000 calls will be made to book.
 #include <bits/stdc++.h>
 using namespace std;
 
+// using maps
+class MyCalendar
+{
+    map<int, int> m;
+
+public:
+    MyCalendar()
+    {
+    }
+
+    bool book(int start, int end)
+    {
+        m[start]++;
+        m[end]--;
+        int book = 0;
+        for (auto &i : m)
+        {
+            book += i.second;
+            if (book == 2)
+            {
+                m[start]--;
+                m[end]++;
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
 // using sets
 class MyCalendar
 {
