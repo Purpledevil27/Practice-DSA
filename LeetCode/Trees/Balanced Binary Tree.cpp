@@ -3,7 +3,6 @@
 /*Given a binary tree, determine if it is height-balanced.
 
 For this problem, a height-balanced binary tree is defined as:
-
 a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
 
 Example 1:
@@ -25,7 +24,6 @@ Constraints:
 
 The number of nodes in the tree is in the range [0, 5000].
 -10^4 <= Node.val <= 10^4
-
 */
 
 #include <bits/stdc++.h>
@@ -43,6 +41,41 @@ public:
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// Time complexity - O(N)
+class Solution
+{
+    int isBalancedhelper(TreeNode *root)
+    {
+        if (root == NULL)
+        {
+            return 0;
+        }
+        int left = isBalancedhelper(root->left);
+        if (left == -1)
+            return -1;
+        int right = isBalancedhelper(root->right);
+        if (right == -1)
+            return -1;
+        if (abs(left - right) > 1)
+            return -1;
+        return max(left, right) + 1;
+    }
+
+public:
+    bool isBalanced(TreeNode *root)
+    {
+        if (isBalancedhelper(root) == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+};
+
+// Time complexity - O(N^2)
 class Solution
 {
 public:

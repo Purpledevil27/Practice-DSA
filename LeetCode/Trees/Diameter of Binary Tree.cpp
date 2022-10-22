@@ -21,7 +21,6 @@ Constraints:
 
 The number of nodes in the tree is in the range [1, 10^4].
 -100 <= Node.val <= 100
-
 */
 
 #include <bits/stdc++.h>
@@ -40,6 +39,27 @@ public:
 };
 
 // Approach #1
+class Solution
+{
+public:
+    int height(TreeNode *root, int &dia)
+    {
+        if (root == NULL)
+            return 0;
+        int lefDia = height(root->left, dia);
+        int rigDia = height(root->right, dia);
+        dia = max(dia, lefDia + rigDia);
+        return max(lefDia, rigDia) + 1; // returns the max height
+    }
+    int diameterOfBinaryTree(TreeNode *root)
+    {
+        int dia = 0;
+        height(root, dia);
+        return dia;
+    }
+};
+
+// Approach #2
 class Solution
 {
 public:
@@ -69,27 +89,6 @@ public:
     int diameterOfBinaryTree(TreeNode *root)
     {
         return solve(root).second;
-    }
-};
-
-// Approach #2
-class Solution
-{
-public:
-    int height(TreeNode *root, int &dia)
-    {
-        if (root == NULL)
-            return 0;
-        int lefDia = height(root->left, dia);
-        int rigDia = height(root->right, dia);
-        dia = max(dia, lefDia + rigDia); // as the max dia is the max of right and left
-        return max(lefDia, rigDia) + 1;  // returns the max height
-    }
-    int diameterOfBinaryTree(TreeNode *root)
-    {
-        int dia = 0;
-        height(root, dia);
-        return dia;
     }
 };
 
