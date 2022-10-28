@@ -23,7 +23,70 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
-// Using Priority Queue - Approach #1
+// Using Quick Select - Approach #1 - O(N)
+class Solution
+{
+    int partition(vector<int> &nums, int start, int end)
+    {
+        int pivot = nums[start];
+        int count = 0;
+        for (int i = start + 1; i <= end; i++)
+        {
+            if (nums[i] <= pivot)
+            {
+                count++;
+            }
+        }
+        int pivotIndex = start + count;
+        swap(nums[start], nums[pivotIndex]);
+        int i = start, j = end;
+        while (i < pivotIndex && j > pivotIndex)
+        {
+            while (nums[i] <= pivot)
+            {
+                i++;
+            }
+            while (nums[j] > pivot)
+            {
+                j--;
+            }
+            if (i < pivotIndex && j > pivotIndex)
+            {
+                swap(nums[i++], nums[j--]);
+            }
+        }
+        return pivotIndex;
+    }
+
+public:
+    int findKthLargest(vector<int> &nums, int k)
+    {
+        int n = nums.size();
+        if (n == 1)
+            return nums[0];
+        int high = n - 1, low = 0, targetIndex = n - k;
+
+        while (high >= low)
+        {
+            int p = partition(nums, low, high);
+            if (p == targetIndex)
+            {
+                return nums[p];
+            }
+            else if (p > targetIndex)
+            {
+                high = p - 1;
+            }
+            else
+            {
+                low = p + 1;
+            }
+        }
+        return -1;
+    }
+};
+
+// Using Priority Queue - Approach #2 - O(nlogn)
 class Solution
 {
 public:
@@ -46,7 +109,7 @@ public:
     }
 };
 
-// Using sort function - Approach #2
+// Using sort function - Approach #3 - O(nlogn)
 class Solution
 {
 public:
