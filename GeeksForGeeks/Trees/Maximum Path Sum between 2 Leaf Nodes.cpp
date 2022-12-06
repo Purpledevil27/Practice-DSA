@@ -144,48 +144,34 @@ struct Node
 };
 */
 
-int travel(Node *curr, int &ans, bool isRoot)
-{
-    if (curr == NULL)
-    {
-        return INT_MIN;
-    }
-    int left_val = travel(curr->left, ans, false);
-    int right_val = travel(curr->right, ans, false);
-    if (left_val == INT_MIN && right_val == INT_MIN)
-    {
-        return curr->data;
-    }
-    else if (left_val != INT_MIN && right_val != INT_MIN)
-    {
-        ans = max(left_val + right_val + curr->data, ans);
-        return max(left_val + curr->data, right_val + curr->data);
-    }
-    else
-    {
-        if (left_val != INT_MIN)
-        {
-            if (isRoot)
-                ans = max(curr->data + left_val, ans);
-            return curr->data + left_val;
-        }
-        else
-        {
-            if (isRoot)
-                ans = max(curr->data + right_val, ans);
-            return curr->data + right_val;
-        }
-    }
-}
-
 class Solution
 {
 public:
+    int func(Node *root, int &ans)
+    {
+        if (!root->left && !root->right)
+        {
+            return root->data;
+        }
+
+        int ls = INT_MIN, rs = INT_MIN;
+        if (root->left)
+            ls = func(root->left, ans);
+        if (root->right)
+            rs = func(root->right, ans);
+
+        if (ls != INT_MIN && rs != INT_MIN)
+            ans = max(ans, ls + rs + root->data);
+        return root->data + max(ls, rs);
+    }
     int maxPathSum(Node *root)
     {
         int ans = INT_MIN;
-        int curr = 0;
-        curr = travel(root, ans, true);
+        int res = func(root, ans);
+        if (!root->left || !root->right)
+        {
+            ans = max(res, ans);
+        }
         return ans;
     }
 };
